@@ -1,0 +1,22 @@
+def deci_to_bin(deciNum):
+
+    """
+    converts decimal number to it's equivalent binary number.
+    """
+
+    binNum = 0
+    power = 0
+
+    while deciNum > 0:
+        binNum += 10 ** power * (deciNum % 2)
+        deciNum //= 2
+        power += 1
+
+    return binNum
+def main():
+    deciNum = int(input('Enter a num in decimal: '))
+    result = deci_to_bin(deciNum)
+    print('The binary equivalent for {} is {}'.format(deciNum,result))
+
+if __name__ == '__main__':
+    main()
