@@ -1,0 +1,135 @@
+class Mass():
+
+
+    """
+    DOCSTRING: Mass(): contains __init__(), that has attributes as kilograms and pounds.
+    KiloToPound(), converts mass in pounds from kilograms and finally PoundToKilo() that does
+    the vice versa
+
+    """
+
+    def __init__(self,kilograms,pounds):
+        self.kilograms = kilograms
+        self.pounds = pounds
+
+
+    def KiloToPound(self):
+        self.kilograms= float(input('Enter mass in kilograms: '))
+        self.pounds = self.kilograms * 2.2
+
+        return self.pounds
+
+    def PoundToKilo(self):
+        self.pounds = float(input('Enter mass in pounds: '))
+        self.kilograms = self.pounds / 2.2
+
+        return self.kilograms
+
+m = Mass(0,0)
+
+
+class Currency():
+
+
+    """
+    DOCSTRING: contains __init__(), that has attributes as Pkr (Pakistani ruppee) and USD.
+    PkrToUSD(), converts rupees in Pkr to USD, and finally USDToPkr() that does
+    the vice versa
+
+    """
+
+    def __init__(self,Pkr,USdollar):
+        self.Pkr = Pkr
+        self.USdollar = USdollar
+
+    def PkrToUSD(self):
+        self.Pkr = float(input('Enter amount in Pkr: '))
+        self.USdollar = self.Pkr / 139.89
+
+        return self.USdollar
+
+
+    def USDToPkr(self):
+        self.USdollar = float(input('Enter amount in USD: '))
+        self.Pkr = self.USdollar * 139.89
+
+        return self.Pkr
+
+c = Currency(0,0)
+
+
+class Temp():
+
+
+    """
+    DOCSTRING: contains __init__(), that has attributes as celcius and fahrenheit.
+    CelToFah(), converts temperature in fahrenheit from celcius and finally FahToCel() that does
+    the vice versa
+
+    """
+
+    def __init__(self,celcius, fahrenheit):
+        self.celcius = celcius
+        self.fahrenheit = fahrenheit
+
+    def CelToFah(self):
+        self.celcius = float(input('Enter temp in degrees Celcius: '))
+        self.fahrenheit = ((9/5) * self.celcius + 32)
+
+        return self.fahrenheit
+
+    def FahToCel(self):
+        self.fahrenheit = float(input('Enter temp in degrees Fahrenheit: '))
+        self.celcius = ((5/9) * self.fahrenheit - 32)
+
+        return self.celcius
+
+t = Temp(0,0)
+
+
+
+
+
+
+def main():
+
+    ConversionTypes = 'mass currency temp'.split()
+    answer = input('Choose type of conversion \n(Mass/Currency/Temp): ')
+
+
+    if answer.lower() not in ConversionTypes:
+        print('Please choose a valid conversion type!')
+
+    if answer.lower() == 'mass':
+        answer = input('Select type you want to convert in, (Pounds/Kilograms): ')
+        if answer.lower() == 'pounds':
+            var1 = m.KiloToPound()
+            print(var1)
+        if answer.lower() == 'kilograms':
+            var2 = m.PoundToKilo()
+            print(var2)
+
+
+    if answer.lower() == 'currency':
+        answer = input('Enter the type you want to convert in, (PKR/USD): ')
+        if answer.lower() == 'pkr':
+            var3 = c.USDToPkr()
+            print(var3)
+        if answer.lower() == 'usd':
+            var4 = c.PkrToUSD()
+            print(var4)
+
+
+    if answer.lower() == 'temp':
+        answer = input('Enter the Unit you want to convert in, (Celcius/Fahrenheit): ')
+        if answer.lower() == 'celcius':
+            var5 = t.FahToCel()
+            print(var5)
+
+        if answer.lower() == 'fahrenheit':
+            var6 = t.CelToFah()
+            print(var6)
+
+
+if __name__ == '__main__':
+    main()
