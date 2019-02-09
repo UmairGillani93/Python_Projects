@@ -3,8 +3,7 @@ This repository contains some basic to intermediate level Python programs to get
 
 ## list of programs:
 
-python unit converter (using OOP)
-simple text editor (using python)
+python unit converter (using OOP), simple text editor(using python), luhn's algorithm(credit card validator), binary_to_decimal_converter, decimal_to_binary_converter
 
 # umairgillani93@gmail.com
 # Created by UG_PYTHON
