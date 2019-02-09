@@ -1,0 +1,21 @@
+def primes():
+
+    """
+    returns back the list of all the prime numbers between upper and lower given range:
+    created by @UG_PYTHON
+    """
+
+    lower = int(input('Enter lower limit: '))
+    upper = int(input('Enter upper limit: '))
+    primes_list = []
+
+    for num in range(lower, upper+1):
+        if num > 1:
+            for i in range(2,num):
+                if num % i == 0:
+                    break
+            else:
+                primes_list.append(num)
+    print(primes_list)
+
+primes()
