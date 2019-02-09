@@ -1,0 +1,112 @@
+## created by UG_PYTHON
+dated: 18 dec,2018
+
+
+"""
+STEPS FOR MAKING A SIMPLE_PYTHON_TEXT_EDITOR:
+
+    1-importing the libraries i.e tkinter, tkinter.filedialog, tkinter.messagebox
+    2-make a class 'anyname', derived from Frame widgets, make an __init__(pass some argument) method inside a class
+    and call the __init__() inside the same class.
+    3-Call a method that sets widgets inside class 'anything'
+    4-Create a method that sets the following widgets..
+        - sets the width and height of the panel
+        - expands both the width and height using pack()
+        - instantiate the Menu()
+        - sets different submenus in menubar instance, i.e filemenu, editmenu and toolsmenu
+        - add commands using add_command() in each of these submenus and label their function as well
+        - Cascade every submenu on menu bar using cascade()
+        - configure root at the end
+
+    5-Create a method for every single command, newfile, save, save_As, copy, paste etc in every respective submenus
+    6-Instantiate Tk() as 'root'
+    7-Set root's title and geometry
+    8-Instantiate class Application() passing in argument 'root'
+    9-Start off the mainloop() off of Application(): instance
+"""
+
+
+
+
+from tkinter import *      ## absolutely import library 'tkinter' i.e import all packages
+import tkinter.filedialog as tk          ## import filedialog as 'tk'
+import tkinter.messagebox as tk2            ## import messagebox as tk2
+
+class Editor(Frame):   ## inherit Frame class library in application class
+
+    def __init__(self,a):
+        super().__init__(a)    ##call the constructor in application class
+        self.create_widgets()   ## call the funcion that is made in the same class
+
+    def create_widgets(self):
+        self.text1 = Text(width = 10, height = 20)  ## Text() to set the width and height of panel
+        self.text1.pack(expand=YES, fill=BOTH)         #to make the textbox fill entire window
+
+        menubar = Menu(self)  ## call Menu function to set the menubar
+        filemenu = Menu(menubar)  ## setting the object 'filemenu' of menubar
+        editmenu = Menu(menubar)  ## setting the object 'editmenu' of menubar
+        toolsmenu = Menu(menubar)  ## setting the object 'toolsmenu' of menubar
+        filemenu.add_command(label = 'New', command = self.newDoc) ## setting labels and commands for object
+        filemenu.add_command(label = 'Save', command = self.saveDoc) ## setting labels and commands for object filemenu
+        filemenu.add_command(label = 'Open', command = self.openDoc)
+        filemenu.add_command(label = 'Quit', command = root.quit)
+        editmenu.add_command(label = 'Copy', command = self.copy)
+        editmenu.add_command(label = 'Paste', command = self.paste)
+        editmenu.add_command(label = 'Clear', command = self.clear)
+        toolsmenu.add_command(label = 'Word Count', command = self.wordCount)
+        toolsmenu.add_command(label = 'Char count', command = self.countChar)
+        menubar.add_cascade(label = 'File', menu = filemenu) ## cascading different objects of menubar
+        menubar.add_cascade(label = 'Edit', menu = editmenu)
+        menubar.add_cascade(label = 'Tools', menu = toolsmenu)
+        root.config(menu=menubar) ## configuration of menubar
+
+    def newDoc(self): ## filemenu object 'newDoc'
+        if(tk2.askyesno("Message", "Unsaved work will be lost. Continue?")): ## calling func off of tk2 i.e messagebox asks user to open a newfile
+            self.text1.delete("1.0", END) ## deletes the whole data in text panel
+
+    def saveDoc(self): ## filemenu object 'saveDoc'
+        savefile = tk.asksaveasfile(mode = 'w', defaultextension = ".txt") ## opens a file in write mode, with extension '.txt' and calls the asksaveas() off of filedialog to save it
+        text2save = str(self.text1.get("1.0", END)) ## gets file name in string from user, and saves it in 'text2save'
+        savefile.write(text2save) ## writes the user's given string in savefile
+        savefile.close() ## closes the file
+
+
+    def openDoc(self): ## creates an object 'openDoc' in filemenu
+        openfile = tk.askopenfile(mode = 'r') ## opens file in read mode,by calling the askopenfile() off of filedialog in read mode
+        text = openfile.read() ## makes file readable
+        self.text1.insert(END, text) ## insert 'text' as string at specified index 'END'
+        openfile.close() ## closes the file
+
+    def copy(self): ## editmenu object 'copy'
+        #Copy the selected text into the clipboard
+        var = str(self.text1.get(tk.SEL_FIRST(),tk.SEL_LAST())) ## take string from index_1st to index_last
+        self.clipboard_clear()  ## clears the clipboard
+        self.clipboard_append(var) ## appends the selected string
+
+
+    def paste(self): ## editmenu object 'paste'
+        #Insert the clipboard text into the textbox
+        result = self.selection_get(selection = "CLIPBOARD")   #get text from clipboard
+        self.text1.insert("1.0", result) ## insert text from index_1st, result = selected string
+
+    def clear(self): ## editmenu object 'clear'
+        self.text1.delete("1.0", END) ## deletes everything from index_1 to end
+
+    def wordCount(self):
+        #Get text from textbox and split it by whitespace characters into a list. Then find length of list
+        userText = self.text1.get("1.0", END) ## gets text from user
+        wordList = userText.split() ## splits it by whitespace
+        number_of_words = len(wordList) ## counts the no. of words
+        tk2.showinfo('Word Count', 'Words:  ' + str(number_of_words)) ## show the number of words
+
+    def countChar(self):
+
+        user1Text = self.text1.get("1.0", END)
+        string_len = len(user1Text)
+        tk2.showinfo('Character count', 'Characters: ' + str(string_len))
+
+root = Tk() ## Hides main window
+root.title('Text Editor') ## gives title to the root window
+root.geometry('700x600') ## sets the geometry for text panel
+Editor = Editor(root) ## initiates the application class
+Editor.mainloop() ## starts the loop
