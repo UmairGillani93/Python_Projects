@@ -1,0 +1,25 @@
+def binTodeci(binNum):
+    
+    """
+    converts a binary number to its's equivalent decimanl number
+    
+    """
+    deciNum = 0
+    power = 0
+
+    while binNum > 0:
+
+        deciNum += 2 ** power * (binNum % 10)
+        binNum //= 10
+        power += 1
+
+    return deciNum
+
+def main():
+
+    binNum = int(input('Enter a num binary number: '))
+    result = binTodeci(binNum)
+    print('The deci equivalent for {} is {}'.format(binNum, result))
+
+if __name__ == '__main__':
+    main()
