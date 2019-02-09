@@ -1,0 +1,30 @@
+## created by UG_PYTHON
+
+
+def CreditCardValidator(card_no):
+    """
+    CreditCardValidator() checks if the card number from (VISA, MasterCard, AmericanExpress
+    is valid or not)
+
+    """
+    if not isinstance(card_no,str): ## makes credit card number a string for future utilization
+        card_no = str(card_no)
+
+    card_no = card_no[::-1]  ## reversing the string as per luhn's algorithm
+    numlist = []
+    for num in card_no:
+        if card_no.isdigit():
+            numlist.append(int(num))
+
+    count = 0
+    for i,val in enumerate(numlist):
+        if i % 2 == 0:
+            count += val  ## additing to the value of count if number is even
+        else:
+            count += (val * 2) // 10 ## adding right digit to count i.e quotient
+            count += (val* 2) % 10 ## adding most left digit to count i.e reminder
+
+    return (count % 10 == 0)
+
+a = CreditCardValidator(4111111111111111)
+print(a)
