@@ -1,0 +1,14 @@
+"""
+febonnaci series: returns the sum of two previous numbers
+"""
+
+
+def fibon(n):
+
+	a,b = 0,1
+
+	for num in range(n+1):
+		print(a)
+		a,b = b,a+b
+
+fibon(20)
