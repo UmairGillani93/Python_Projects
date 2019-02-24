@@ -1,0 +1,76 @@
+"""
+Grade_Point_Average calculator
+created by: UG_PYTHON
+
+
+"""
+
+
+def course_GPA(marks):
+
+    courseGPA = 0
+
+    if marks in range(80, 101):
+        courseGPA = 4.0
+    elif marks in range(75,80):
+        courseGPA = 3.5
+    elif marks in range(70,75):
+        courseGPA = 3.0
+    elif marks in range(65,70):
+        courseGPA = 2.5
+    elif marks in range(60, 65):
+        courseGPA = 2.0
+    elif marks in range(55,60):
+        courseGPA = 1.5
+    elif marks in range(50,55):
+        courseGPA = 1.0
+    elif marks < 50:
+        courseGPA = 0
+
+    return courseGPA
+
+def credit_hrs(course_title):
+
+    if course_title == 'arabic1':
+        crdhrs = 2
+    else:
+        crdhrs = 3
+
+    return crdhrs
+
+def main():
+    total_credithrs = 17
+    course1_title = str(input('Enter course title: '))
+    course1_marks = int(input('Enter marks: '))
+    course2_title = str(input('Enter course title: '))
+    course2_marks = int(input('Enter marks: '))
+    course3_title = str(input('Enter course title: '))
+    course3_marks = int(input('Enter marks: '))
+    course4_title = str(input('Enter course title: '))
+    course4_marks = int(input('Enter marks: '))
+    course5_title = str(input('Enter course title: '))
+    course5_marks = int(input('Enter marks: '))
+    course6_title = str(input('Enter course title: '))
+    course6_marks = int(input('Enter marks: '))
+    c1_gpa = course_GPA(course1_marks)
+    c1_crdhrs = credit_hrs(course1_title)
+    c2_gpa = course_GPA(course1_marks)
+    c2_crdhrs = credit_hrs(course2_title)
+    c3_gpa = course_GPA(course3_marks)
+    c3_crdhrs = credit_hrs(course3_title)
+    c4_gpa = course_GPA(course4_marks)
+    c4_crdhrs = credit_hrs(course4_title)
+    c5_gpa = course_GPA(course5_marks)
+    c5_crdhrs = credit_hrs(course5_title)
+    c6_gpa = course_GPA(course6_marks)
+    c6_crdhrs = credit_hrs(course6_title)
+
+    course_calculation = (c1_gpa * c1_crdhrs) + (c2_gpa * c2_crdhrs) + (c3_gpa * c3_crdhrs) + (c4_gpa * c4_crdhrs) + (c5_gpa * c5_crdhrs) + (c6_gpa * c6_crdhrs)
+
+    CGPA = course_calculation / total_credithrs
+
+    print('Your commulative GPA is %.2f' %CGPA)
+
+
+if __name__ == '__main__':
+    main()
